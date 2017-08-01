@@ -1,0 +1,5 @@
+package: github.com/weiwei04/helm-registry-plugin
+import:
+- package: github.com/caicloud/helm-registry
+- package: github.com/urfave/cli
+  version: ~1.19.1

@@ -1,0 +1,34 @@
+hash: 7e5b65a73bc9de6975e9cea54b60b0bd1328873cea9400a8ad1e60a890c191fb
+updated: 2017-08-01T14:16:23.868590788+08:00
+imports:
+- name: github.com/caicloud/helm-registry
+  version: 90def3c24080972ac782a8a626fefb99f1d0eab5
+  subpackages:
+  - pkg/api/models
+  - pkg/errors
+  - pkg/log
+  - pkg/rest
+  - pkg/rest/v1
+  - pkg/storage
+- name: github.com/golang/protobuf
+  version: 2bba0603135d7d7f5cb73b2125beeda19c09f4ef
+  subpackages:
+  - proto
+  - ptypes/any
+  - ptypes/timestamp
+- name: github.com/Sirupsen/logrus
+  version: 9aa7601a1185e3bc8a0d3f87b1a55b05df0102e4
+- name: github.com/urfave/cli
+  version: 0bdeddeeb0f650497d603c4ad7b20cfe685682f6
+- name: golang.org/x/sys
+  version: 35ef4487ce0a1ea5d4b616ffe71e34febe723695
+  subpackages:
+  - unix
+  - windows
+- name: gopkg.in/yaml.v2
+  version: 25c4ec802a7d637f88d584ab26798e94ad14c13b
+- name: k8s.io/helm
+  version: 7cf31e8d9a026287041bae077b09165be247ae66
+  subpackages:
+  - pkg/proto/hapi/chart
+testImports: []
