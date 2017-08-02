@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
 
 	"github.com/urfave/cli"
-	"gopkg.in/yaml.v2"
+	yaml "gopkg.in/yaml.v2"
 )
 
 type chartValues map[string]interface{}
@@ -19,6 +20,7 @@ var ChartCommand = cli.Command{
 		pushChartCommand,
 		inspectChartCommand,
 		getChartFileCommand,
+		fetchChartCommand,
 	},
 }
 
@@ -189,5 +191,41 @@ var getChartFileCommand = cli.Command{
 		fmt.Println(string(data))
 		fmt.Println("-----------------------------------------")
 		return nil
+	},
+}
+
+var fetchChartCommand = cli.Command{
+	Name: "fetch",
+	Usage: `fetch space/chart:ver
+    for example:
+    fetch myspace/mychart:0.0.1 (this will download myspace/mychart:0.0.1 chart package)`,
+	Flags: []cli.Flag{
+		cli.StringFlag{
+			Name:  "output, 0",
+			Value: "./",
+			Usage: `-o dir`,
+		},
+	},
+	Action: func(ctx *cli.Context) error {
+		if err := checkArgs(ctx, 1, exactArgs); err != nil {
+			return err
+		}
+		c, err := defaultClient()
+		if err != nil {
+			return err
+		}
+		arg := ctx.Args().First()
+		space, name, ver, err := splitSpaceChartVer(arg)
+		if err != nil {
+			return err
+		}
+		raw, err := c.DownloadVersion(space, name, ver)
+		if err != nil {
+			return err
+		}
+		tarName := name + "-" + ver + ".tgz"
+		dir := ctx.String("output")
+		fileName := filepath.Join(dir, tarName)
+		return ioutil.WriteFile(fileName, raw, 0644)
 	},
 }

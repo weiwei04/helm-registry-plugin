@@ -2,7 +2,6 @@ package registry
 
 import (
 	"fmt"
-	"github.com/caicloud/helm-registry/pkg/rest/v1"
 	"github.com/urfave/cli"
 )
 
